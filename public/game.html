@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Room - Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-container">
+            <div class="game-header">
+                <div class="room-info">
+                    <h2>🎮 Room: <span id="room-id"></span></h2>
+                    <button class="share-btn" id="share-btn">📋 Share Room</button>
+                </div>
+                <button class="back-btn" id="back-btn">← Back to Lobby</button>
+            </div>
+            
+            <div class="players-info">
+                <div class="player player-x" id="player-x">
+                    <div class="player-avatar">❌</div>
+                    <div class="player-details">
+                        <span class="player-name">Waiting...</span>
+                        <span class="player-symbol">Player X</span>
+                    </div>
+                    <div class="turn-indicator" id="turn-x"></div>
+                </div>
+                
+                <div class="vs-divider">VS</div>
+                
+                <div class="player player-o" id="player-o">
+                    <div class="player-avatar">⭕</div>
+                    <div class="player-details">
+                        <span class="player-name">Waiting...</span>
+                        <span class="player-symbol">Player O</span>
+                    </div>
+                    <div class="turn-indicator" id="turn-o"></div>
+                </div>
+            </div>
+            
+            <div class="game-board-container">
+                <div class="game-status" id="game-status">Waiting for players...</div>
+                
+                <div class="game-board" id="game-board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                
+                <div class="game-controls" id="game-controls" style="display: none;">
+                    <button class="control-btn rematch-btn" id="rematch-btn">🔄 Rematch</button>
+                </div>
+            </div>
+            
+            <div class="reactions-panel">
+                <h4>Quick Reactions</h4>
+                <div class="reactions">
+                    <button class="reaction-btn" data-reaction="😄">😄</button>
+                    <button class="reaction-btn" data-reaction="😮">😮</button>
+                    <button class="reaction-btn" data-reaction="😎">😎</button>
+                    <button class="reaction-btn" data-reaction="🤔">🤔</button>
+                    <button class="reaction-btn" data-reaction="😤">😤</button>
+                    <button class="reaction-btn" data-reaction="🎉">🎉</button>
+                </div>
+                <div class="reaction-display" id="reaction-display"></div>
+            </div>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <div class="confetti" id="confetti"></div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

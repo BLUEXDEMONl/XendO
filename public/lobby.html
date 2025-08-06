@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Lobby - Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lobby-container">
+            <div class="lobby-header">
+                <h1>🎮 Game Lobby</h1>
+                <div class="user-info">
+                    <span class="user-avatar" id="user-avatar"></span>
+                    <span class="username" id="username"></span>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+            
+            <div class="lobby-options">
+                <div class="option-card create-game">
+                    <div class="card-icon">🚀</div>
+                    <h3>Create New Game</h3>
+                    <p>Start a new room and invite friends</p>
+                    <button class="action-btn primary" id="create-room-btn">
+                        <span>Create Room</span>
+                        <div class="btn-loader"></div>
+                    </button>
+                </div>
+                
+                <div class="option-card join-game">
+                    <div class="card-icon">🎯</div>
+                    <h3>Join Game</h3>
+                    <p>Enter a room code to join existing game</p>
+                    <div class="join-form">
+                        <input type="text" id="room-code" placeholder="Enter room code" maxlength="8">
+                        <button class="action-btn secondary" id="join-room-btn">
+                            <span>Join</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-history">
+                <h3>🏆 Recent Games</h3>
+                <div id="history-list" class="history-list">
+                    <div class="no-history">No games played yet</div>
+                </div>
+            </div>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <div class="background-animation">
+        <div class="floating-x">❌</div>
+        <div class="floating-o">⭕</div>
+        <div class="floating-x">❌</div>
+        <div class="floating-o">⭕</div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/lobby.js"></script>
+</body>
+</html>

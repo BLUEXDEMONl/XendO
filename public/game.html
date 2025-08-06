@@ -4,43 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Room - Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="game-container">
+        <div class="game-container fade-in">
             <div class="game-header">
                 <div class="room-info">
-                    <h2>🎮 Room: <span id="room-id"></span></h2>
-                    <button class="share-btn" id="share-btn">📋 Share Room</button>
+                    <h2>🎮 ROOM: <span id="room-id"></span></h2>
+                    <button class="share-btn" id="share-btn">📋 Share Battle</button>
                 </div>
-                <button class="back-btn" id="back-btn">← Back to Lobby</button>
+                <button class="back-btn" id="back-btn">← Return to Lobby</button>
             </div>
             
-            <div class="players-info">
+            <div class="players-info bounce-in">
                 <div class="player player-x" id="player-x">
                     <div class="player-avatar">❌</div>
                     <div class="player-details">
-                        <span class="player-name">Waiting...</span>
-                        <span class="player-symbol">Player X</span>
+                        <span class="player-name">Searching...</span>
+                        <span class="player-symbol">Warrior X</span>
                     </div>
                     <div class="turn-indicator" id="turn-x"></div>
                 </div>
                 
-                <div class="vs-divider">VS</div>
+                <div class="vs-divider">⚔️</div>
                 
                 <div class="player player-o" id="player-o">
                     <div class="player-avatar">⭕</div>
                     <div class="player-details">
-                        <span class="player-name">Waiting...</span>
-                        <span class="player-symbol">Player O</span>
+                        <span class="player-name">Searching...</span>
+                        <span class="player-symbol">Champion O</span>
                     </div>
                     <div class="turn-indicator" id="turn-o"></div>
                 </div>
             </div>
             
             <div class="game-board-container">
-                <div class="game-status" id="game-status">Waiting for players...</div>
+                <div class="game-status" id="game-status">🔍 Searching for worthy opponents...</div>
                 
                 <div class="game-board" id="game-board">
                     <div class="cell" data-index="0"></div>
@@ -55,12 +58,12 @@
                 </div>
                 
                 <div class="game-controls" id="game-controls" style="display: none;">
-                    <button class="control-btn rematch-btn" id="rematch-btn">🔄 Rematch</button>
+                    <button class="control-btn rematch-btn" id="rematch-btn">⚔️ Battle Again</button>
                 </div>
             </div>
             
             <div class="reactions-panel">
-                <h4>Quick Reactions</h4>
+                <h4>⚡ Battle Reactions</h4>
                 <div class="reactions">
                     <button class="reaction-btn" data-reaction="😄">😄</button>
                     <button class="reaction-btn" data-reaction="😮">😮</button>
@@ -68,6 +71,8 @@
                     <button class="reaction-btn" data-reaction="🤔">🤔</button>
                     <button class="reaction-btn" data-reaction="😤">😤</button>
                     <button class="reaction-btn" data-reaction="🎉">🎉</button>
+                    <button class="reaction-btn" data-reaction="🔥">🔥</button>
+                    <button class="reaction-btn" data-reaction="💪">💪</button>
                 </div>
                 <div class="reaction-display" id="reaction-display"></div>
             </div>

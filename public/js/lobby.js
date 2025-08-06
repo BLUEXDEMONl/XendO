@@ -33,9 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
         messageDiv.className = `message ${type}`;
         messageDiv.style.display = 'block';
+        messageDiv.classList.add('bounce-in');
         
         setTimeout(() => {
             messageDiv.style.display = 'none';
+            messageDiv.classList.remove('bounce-in');
         }, 5000);
     }
 
@@ -60,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
         historyList.innerHTML = history.map(game => `
             <div class="history-item">
                 <div>
-                    <strong>vs ${game.opponent}</strong>
+                    <strong>⚔️ vs ${game.opponent}</strong>
                     <div style="font-size: 12px; color: #666;">${game.date}</div>
                 </div>
-                <div style="font-weight: bold; color: ${game.result === 'win' ? '#28a745' : game.result === 'loss' ? '#dc3545' : '#ffc107'}">
-                    ${game.result.toUpperCase()}
+                <div style="font-weight: bold; color: ${game.result === 'win' ? '#4ade80' : game.result === 'loss' ? '#f87171' : '#fbbf24'}">
+                    ${game.result === 'win' ? '🏆 VICTORY' : game.result === 'loss' ? '💀 DEFEAT' : '🤝 DRAW'}
                 </div>
             </div>
         `).join('');
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on('room-created', (data) => {
         setLoading(createRoomBtn, false);
-        showMessage(`Room created! Code: ${data.roomId}`, 'success');
+        showMessage(`🚀 Battle arena created! Code: ${data.roomId}`, 'success');
         
         setTimeout(() => {
             window.location.href = `/game.html?room=${data.roomId}`;
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     socket.on('disconnect', () => {
-        showMessage('Connection lost. Please refresh the page.', 'error');
+        showMessage('⚠️ Connection lost. Please refresh the page.', 'error');
     });
 
     window.saveGameResult = saveGameResult;

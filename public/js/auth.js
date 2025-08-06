@@ -34,9 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
         messageDiv.className = `message ${type}`;
         messageDiv.style.display = 'block';
+        messageDiv.classList.add('bounce-in');
         
         setTimeout(() => {
             messageDiv.style.display = 'none';
+            messageDiv.classList.remove('bounce-in');
         }, 5000);
     }
 
@@ -106,8 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        if (password.length < 4) {
-            showMessage('Password must be at least 4 characters long', 'error');
+        if (password.length < 6) {
+            showMessage('Password must be at least 6 characters long', 'error');
             return;
         }
         
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if (response.ok) {
-                showMessage('Account created successfully! Redirecting...', 'success');
+                showMessage('🎉 Welcome to the arena! Redirecting...', 'success');
                 setTimeout(() => {
                     window.location.href = '/lobby.html';
                 }, 1000);
@@ -133,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage(data.error || 'Signup failed', 'error');
             }
         } catch (error) {
-            showMessage('Network error. Please try again.', 'error');
+            showMessage('⚠️ Connection error. Please try again.', 'error');
         } finally {
             setLoading(signupForm, false);
         }

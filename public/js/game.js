@@ -57,9 +57,11 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.textContent = message;
         messageDiv.className = `message ${type}`;
         messageDiv.style.display = 'block';
+        messageDiv.classList.add('bounce-in');
         
         setTimeout(() => {
             messageDiv.style.display = 'none';
+            messageDiv.classList.remove('bounce-in');
         }, 5000);
     }
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             playerXElement.querySelector('.player-name').textContent = playerX.username;
             playerXElement.classList.add('connected');
         } else {
-            playerXElement.querySelector('.player-name').textContent = 'Waiting...';
+            playerXElement.querySelector('.player-name').textContent = 'Searching...';
             playerXElement.classList.remove('connected');
         }
         
@@ -79,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             playerOElement.querySelector('.player-name').textContent = playerO.username;
             playerOElement.classList.add('connected');
         } else {
-            playerOElement.querySelector('.player-name').textContent = 'Waiting...';
+            playerOElement.querySelector('.player-name').textContent = 'Searching...';
             playerOElement.classList.remove('connected');
         }
         
@@ -118,24 +120,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         switch (room.gameStatus) {
             case 'waiting':
-                status = 'Waiting for another player to join...';
+                status = '🔍 Searching for a worthy opponent...';
                 gameActive = false;
                 break;
             case 'playing':
                 const isMyTurn = room.currentTurn === mySymbol;
                 status = isMyTurn ? 
-                    `Your turn! (${mySymbol === 'X' ? '❌' : '⭕'})` : 
-                    `Waiting for opponent's move...`;
+                    `⚡ Your turn! Strike now! (${mySymbol === 'X' ? '❌' : '⭕'})` : 
+                    `⏳ Opponent is thinking...`;
                 gameActive = true;
                 break;
             case 'finished':
                 gameActive = false;
                 if (room.result.winner === 'draw') {
-                    status = "It's a draw! 🤝";
+                    status = "🤝 Epic draw! Both warriors fought valiantly!";
                 } else {
                     const winner = room.players.find(p => p.symbol === room.result.winner);
                     const isWinner = winner && winner.username === currentUser.username;
-                    status = isWinner ? 'You won! 🎉' : `${winner.username} wins! 🏆`;
+                    status = isWinner ? '🏆 VICTORY IS YOURS! You are the champion!' : `👑 ${winner.username} claims victory!`;
                     
                     if (isWinner) {
                         createConfetti();
@@ -205,13 +207,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (navigator.share) {
             navigator.share({
-                title: 'Join my Tic-Tac-Toe game!',
-                text: `Join my game with room code: ${roomId}`,
+                title: 'Join my Tic-Tac-Toe battle!',
+                text: `⚔️ Challenge me in an epic battle! Room code: ${roomId}`,
                 url: gameUrl
             });
         } else if (navigator.clipboard) {
             navigator.clipboard.writeText(gameUrl).then(() => {
-                showMessage('Game link copied to clipboard!', 'success');
+                showMessage('🔗 Battle link copied! Share with your friends!', 'success');
             });
         } else {
             const textArea = document.createElement('textarea');
@@ -220,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            showMessage('Game link copied to clipboard!', 'success');
+            showMessage('🔗 Battle link copied! Share with your friends!', 'success');
         }
     });
 
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('player-joined', (data) => {
         gameRoom = data.room;
         updatePlayerDisplay(gameRoom);
-        showMessage('Player joined! Game starting...', 'success');
+        showMessage('⚔️ Opponent found! Battle commencing...', 'success');
     });
 
     socket.on('game-start', (data) => {
@@ -262,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTurnIndicator(gameRoom.currentTurn);
         updateGameBoard(gameRoom.board);
         updateGameStatus(gameRoom);
-        showMessage('Game started! Good luck!', 'success');
+        showMessage('🚀 Battle has begun! May the best warrior win!', 'success');
     });
 
     socket.on('move-made', (data) => {
@@ -287,19 +289,19 @@ document.addEventListener('DOMContentLoaded', function() {
         updateGameStatus(gameRoom);
         gameControls.style.display = 'none';
         rematchBtn.disabled = false;
-        rematchBtn.textContent = '🔄 Rematch';
-        showMessage('New game started!', 'success');
+        rematchBtn.textContent = '⚔️ Battle Again';
+        showMessage('🔥 New battle initiated! Fight!', 'success');
     });
 
     socket.on('rematch-request', (data) => {
-        showMessage(`${data.username} wants a rematch!`, 'success');
+        showMessage(`⚔️ ${data.username} demands a rematch!`, 'success');
     });
 
     socket.on('player-disconnected', (data) => {
         gameRoom = data.room;
         updatePlayerDisplay(gameRoom);
         updateGameStatus(gameRoom);
-        showMessage('Opponent disconnected. Waiting for reconnection...', 'error');
+        showMessage('💔 Opponent fled the battlefield. Awaiting their return...', 'error');
     });
 
     socket.on('reaction-received', (data) => {
@@ -317,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     socket.on('disconnect', () => {
-        showMessage('Connection lost. Trying to reconnect...', 'error');
+        showMessage('⚠️ Connection lost. Attempting to reconnect...', 'error');
         gameActive = false;
     });
 

@@ -4,39 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Lobby - Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="lobby-container">
+        <div class="lobby-container fade-in">
             <div class="lobby-header">
-                <h1>🎮 Game Lobby</h1>
+                <h1>🎮 GAME LOBBY</h1>
                 <div class="user-info">
                     <span class="user-avatar" id="user-avatar"></span>
-                    <span class="username" id="username"></span>
-                    <button class="logout-btn" id="logout-btn">Logout</button>
+                    <div>
+                        <span class="username" id="username"></span>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.6);">Ready to play</div>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">Sign Out</button>
                 </div>
             </div>
             
             <div class="lobby-options">
-                <div class="option-card create-game">
+                <div class="option-card create-game slide-up">
                     <div class="card-icon">🚀</div>
-                    <h3>Create New Game</h3>
-                    <p>Start a new room and invite friends</p>
+                    <h3>Create Game Room</h3>
+                    <p>Start a new battle arena and challenge your friends to epic matches</p>
                     <button class="action-btn primary" id="create-room-btn">
-                        <span>Create Room</span>
+                        <span>Launch Game</span>
                         <div class="btn-loader"></div>
                     </button>
                 </div>
                 
-                <div class="option-card join-game">
+                <div class="option-card join-game slide-up" style="animation-delay: 0.1s;">
                     <div class="card-icon">🎯</div>
-                    <h3>Join Game</h3>
-                    <p>Enter a room code to join existing game</p>
+                    <h3>Join Battle</h3>
+                    <p>Enter a room code to join an existing game and show your skills</p>
                     <div class="join-form">
-                        <input type="text" id="room-code" placeholder="Enter room code" maxlength="8">
+                        <input type="text" id="room-code" placeholder="ROOM CODE" maxlength="8">
                         <button class="action-btn secondary" id="join-room-btn">
-                            <span>Join</span>
+                            <span>Enter Game</span>
                             <div class="btn-loader"></div>
                         </button>
                     </div>
@@ -44,9 +50,9 @@
             </div>
             
             <div class="game-history">
-                <h3>🏆 Recent Games</h3>
+                <h3>🏆 Battle History</h3>
                 <div id="history-list" class="history-list">
-                    <div class="no-history">No games played yet</div>
+                    <div class="no-history">No battles fought yet. Time to make history! ⚔️</div>
                 </div>
             </div>
             
